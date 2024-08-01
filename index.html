@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MainPage</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="/style.css" />
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.1.2/css/dataTables.bootstrap5.css
+   "
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css
+  "
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.2/js/dataTables.bootstrap5.js"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  </head>
+
+  <body>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+      >
+        <div class="modal-custom-content">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Employee Data
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form class="modal-body modal-body-wrapper p-5" id="addEmployee">
+            <div
+              class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+            >
+              <label
+                class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+              >
+                <div
+                  id="uploadContent"
+                  class="d-flex flex-column justify-content-center align-items-center"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center upload-image-container"
+                  >
+                    <img src="/assest/images/upload.png" alt="Upload Icon" />
+                    <p>Upload logo</p>
+                  </div>
+                  <div
+                    class="d-flex flex-column align-items-center size-container"
+                  >
+                    <p class="file-size">Maximum file size 2MB</p>
+                    <p class="file-format">Format jpg, png</p>
+                  </div>
+                </div>
+                <input
+                  type="file"
+                  id="companyLogo"
+                  onchange="handleFileUpload(this)"
+                />
+              </label>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="firstName"
+                    >First Name <sup class="imp-field">*</sup></label
+                  >
+                  <input
+                    type="text"
+                    id="firstName"
+                    placeholder="Enter first name"
+                  />
+                  <span class="error-form pt-1" id="firstNameError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="middleName">Middle Name </label>
+                  <input
+                    type="text"
+                    id="middleName"
+                    placeholder="Enter middle name"
+                  />
+                  <span class="error-form pt-1" id="middleNameError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="lastName"
+                    >Last Name <sup class="imp-field">*</sup></label
+                  >
+                  <input
+                    type="text"
+                    id="lastName"
+                    placeholder="Enter last name"
+                  />
+                  <span class="error-form pt-1" id="lastNameError"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="department"
+                    >Department<sup class="imp-field">*</sup>
+                  </label>
+                  <select
+                    id="department"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option value="softwaredevelopment">
+                      Software Development
+                    </option>
+                    <option value="itoperations">IT Operations</option>
+                    <option value="qualityassurance">Quality Assurance</option>
+                    <option value="projectManagement/Scrum">
+                      Project Management/Scrum
+                    </option>
+                    <option
+                      value="productManagement
+                          "
+                    >
+                      Product Management
+                    </option>
+                    <option
+                      value="businessAnalytics
+                          "
+                    >
+                      Business Analytics
+                    </option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                    <option
+                      value="customersupport
+                          "
+                    >
+                      Customer Support
+                    </option>
+                    <option
+                      value="humanresources
+                          "
+                    >
+                      Human Resources
+                    </option>
+                    <option
+                      value="financeAccounting
+       
+                          "
+                    >
+                      Finance & Acccarsounting
+                    </option>
+                    <option
+                      value="marketingSales
+       
+                          "
+                    >
+                      Marketing & Sales
+                    </option>
+                    <option
+                      value="humanresources
+                          "
+                    >
+                      Human Resources
+                    </option>
+                    <option
+                      value="testing
+                          "
+                    >
+                      Testing
+                    </option>
+                    <option
+                      value="researchandDevelopment
+       
+                        "
+                    >
+                      Research and Development
+                    </option>
+                    <option
+                      value="technicalSupport
+       
+       
+                      "
+                    >
+                      Technical Support
+                    </option>
+                    <option
+                      value="procurement
+       
+                    "
+                    >
+                      Procurement
+                    </option>
+                  </select>
+                  <span class="error-form" id="departmentError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="passportNumber"
+                    >Passport Number <sup class="imp-field">*</sup></label
+                  >
+                  <input
+                    type="text"
+                    id="passportNumber"
+                    placeholder="Enter last name"
+                  />
+                  <span class="error-form" id="passportNumberError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="birthday"
+                    >Date of birth <sup class="imp-field">*</sup></label
+                  >
+                  <input type="date" id="birthday" name="birthday" />
+                  <span class="error-form" id="birthdayError"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="dateOfJoining">
+                    Date of Joining <sup class="imp-field">*</sup></label
+                  >
+                  <input
+                    type="date"
+                    id="dateOfJoining"
+                    name="Indian Date of Joining"
+                  />
+                  <span class="error-form" id="dateOfJoiningError"></span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Indian Medical Report<sup class="imp-field">*</sup></label
+                  ><select
+                    id="indMedRep"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="green" value="fit">Fit</option>
+                    <option class="orange" value="inprogess">Inprogess</option>
+                    <option class="red" value="unfit">Unfit</option>
+                  </select>
+                  <span class="error-form" id="indMedRepError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Visa Document <sup class="imp-field">*</sup></label
+                  ><select
+                    id="visaDoc"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="red" value="email send">Email sent</option>
+                    <option class="orange" value="inprogress">
+                      Inprogress
+                    </option>
+                    <option class="green" value="collected">Collected</option>
+                  </select>
+                  <span class="error-form" id="visaDocError"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Work Permit <sup class="imp-field">*</sup></label
+                  ><select
+                    id="workPermit"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="green" value="received">Received</option>
+                    <option class="orange" value="inprocess">Inprocess</option>
+                    <option class="red" value="notreceived">
+                      Not Received
+                    </option>
+                  </select>
+                  <span class="error-form" id="workPermitError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Onsite Visa Status <sup class="imp-field">*</sup></label
+                  ><select
+                    id="onsiteVisaStatus"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="green" value="received">Received</option>
+                    <option class="orange" value="inprocess">Inprocess</option>
+                    <option class="red" value="notreceived">
+                      Not Received
+                    </option>
+                  </select>
+                  <span class="error-form" id="onsiteVisaStatusError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Travel Onsite Tickets Status
+                    <sup class="imp-field">*</sup></label
+                  ><select
+                    id="travelOnsite"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="green" value="booked">Booked</option>
+                    <option class="red" value="notbooked">Not Booked</option>
+                  </select>
+                  <span class="error-form" id="travelOnsiteError"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="custom-input-container">
+                  <label for="birthday"
+                    >Onsite Date of Joining
+                    <sup class="imp-field">*</sup></label
+                  >
+                  <input type="date" id="onsiteDOJ" name="onsiteDOJ" disabled />
+                  <span class="error-form" id="onsiteDOJError"></span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Medical Report <sup class="imp-field">*</sup></label
+                  ><select
+                    id="medReport"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+
+                    <option class="orange" value="pending">Pending</option>
+                    <option class="green" value="1st test fit">
+                      1st text Fit
+                    </option>
+                    <option class="red" value="1st test unfit">
+                      1st test Unfit
+                    </option>
+                    <option class="green" value="2nd test fit">
+                      2nd test Fit
+                    </option>
+                    <option class="red" value="2nd test unfit">
+                      2nd test Unfit
+                    </option>
+                  </select>
+                  <span class="error-form" id="medReportError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Visa stamp Status <sup class="imp-field">*</sup></label
+                  ><select
+                    id="visaStamp"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="green" value="received">Received</option>
+                    <option class="red" value="notreceived">
+                      Not Received
+                    </option>
+                  </select>
+                  <span class="error-form" id="visaStampError"></span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Onsite ID Status <sup class="imp-field">*</sup></label
+                  ><select
+                    id="onsiteIdStatus"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option class="green" value="id received">
+                      ID Received
+                    </option>
+                    <option class="orange" value="appointment in process">
+                      Appointment in process
+                    </option>
+                    <option class="red" value="id not received">
+                      ID Not Received
+                    </option>
+                  </select>
+                  <span class="error-form" id="onsiteIdStatusError"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <!-- <div class="col-md-4">
+            <label for="cars" class="custom-lable-font"
+              >Medical Insurance <sup class="imp-field">*</sup></label
+            >
+            <div class="custom-checkbox-container">
+              <div class="form-check mt-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  Medical form filled
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  Correction done
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  Quotation received
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  Payment done
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  Insurance card
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value
+                  id="flexCheckChecked"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  None
+                </label>
+              </div>
+            </div>
+          </div> -->
+              <div class="col-md-4" >
+                <label for="cars" class="custom-label-font"
+                  >Medical Insurance <sup class="imp-field">*</sup></label
+                >
+                <div class="custom-checkbox-container" >
+                  <div class="form-check mt-2">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-all"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckAll"
+                      >All</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-item"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckForm"
+                      >Medical form filled</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-item"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckCorrection"
+                      >Correction done</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-item"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckQuotation"
+                      >Quotation received</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-item"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckPayment"
+                      >Payment done</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-item"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckCard"
+                      >Insurance card</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      value="true"
+                      class="form-check-input checkbox-none"
+                      id="medicalInsCheck"
+                      type="checkbox"
+                      disabled
+                    />
+                    <label class="form-check-label" for="flexCheckNone"
+                      >None</label
+                    >
+                  </div>
+                </div>
+                <span class="error-form" id="medicalInsCheckError"></span>
+
+              </div>
+              <div class="col-md-8">
+                <div class="custom-description">
+                  <label class="custom-lable-font" for="firstName"
+                    >HR Comments <sup class="imp-field">*</sup></label
+                  >
+                  <textarea
+                    id="hrComments"
+                    placeholder="Enter comments"
+                  ></textarea>
+                  <span class="error-form" id="hrCommentsError"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Employee Status <sup class="imp-field">*</sup></label
+                  ><select
+                    id="employeeStatus"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option
+                      class="green"
+                      value="ac
+                    tive"
+                    >
+                      Active
+                    </option>
+                    <option class="orange" value="resigned">Resigned</option>
+                    <option class="red" value="terminated">Terminated</option>
+                    <option class="brown" value="abscont">Abscond</option>
+                  </select>
+                  <span class="error-form" id="employeeStatusError"></span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-dropdown">
+                  <label for="cars"
+                    >Passport Status <sup class="imp-field">*</sup></label
+                  ><select
+                    id="passportStatus"
+                    class="form-select"
+                    aria-label="Default select example"
+                    disabled
+                  >
+                    <option value="" selected>Choose an option</option>
+                    <option value="ID Received">With Employee</option>
+                    <option class="primary" value="Appointment in process">
+                      With Immigration
+                    </option>
+                    <option class="orange" value="ID Not Received">
+                      With Management
+                    </option>
+                    <option class="green" value="ID Not Received">
+                      Returned To Employee
+                    </option>
+                  </select>
+                  <span class="error-form" id="passportStatusError"></span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="mb-4 d-flex align-items-center align-self-stretch gap-2"
+            >
+              <div
+                class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+              >
+                <label
+                  class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+                >
+                  <div
+                    id="uploadContent"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center upload-image-container upload-image-container-rows"
+                    >
+                      <img src="/assest/images/upload.png" alt="Upload Icon" />
+                      <p>Upload logo</p>
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-center size-container size-container-rows"
+                    >
+                      <p class="file-size">Maximum file size 2MB</p>
+                      <p class="file-format">Format jpg, png</p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="companyLogo"
+                    onchange="handleFileUpload(this)"
+                  />
+                </label>
+              </div>
+              <div
+                class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+              >
+                <label
+                  class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+                >
+                  <div
+                    id="uploadContent"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center upload-image-container upload-image-container-rows"
+                    >
+                      <img src="/assest/images/upload.png" alt="Upload Icon" />
+                      <p>Upload logo</p>
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-center size-container size-container-rows"
+                    >
+                      <p class="file-size">Maximum file size 2MB</p>
+                      <p class="file-format">Format jpg, png</p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="companyLogo"
+                    onchange="handleFileUpload(this)"
+                  />
+                </label>
+              </div>
+              <div
+                class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+              >
+                <label
+                  class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+                >
+                  <div
+                    id="uploadContent"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center upload-image-container upload-image-container-rows"
+                    >
+                      <img src="/assest/images/upload.png" alt="Upload Icon" />
+                      <p>Upload logo</p>
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-center size-container size-container-rows"
+                    >
+                      <p class="file-size">Maximum file size 2MB</p>
+                      <p class="file-format">Format jpg, png</p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="companyLogo"
+                    onchange="handleFileUpload(this)"
+                  />
+                </label>
+              </div>
+              <div
+                class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+              >
+                <label
+                  class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+                >
+                  <div
+                    id="uploadContent"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center upload-image-container upload-image-container-rows"
+                    >
+                      <img src="/assest/images/upload.png" alt="Upload Icon" />
+                      <p>Upload logo</p>
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-center size-container size-container-rows"
+                    >
+                      <p class="file-size">Maximum file size 2MB</p>
+                      <p class="file-format">Format jpg, png</p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="companyLogo"
+                    onchange="handleFileUpload(this)"
+                  />
+                </label>
+              </div>
+              <div
+                class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+              >
+                <label
+                  class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+                >
+                  <div
+                    id="uploadContent"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center upload-image-container upload-image-container-rows"
+                    >
+                      <img src="/assest/images/upload.png" alt="Upload Icon" />
+                      <p>Upload logo</p>
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-center size-container size-container-rows"
+                    >
+                      <p class="file-size">Maximum file size 2MB</p>
+                      <p class="file-format">Format jpg, png</p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="companyLogo"
+                    onchange="handleFileUpload(this)"
+                  />
+                </label>
+              </div>
+              <div
+                class="form-group custom-form-group d-flex flex-column justify-content-center align-items-center align-self-stretch"
+              >
+                <label
+                  class="upload-div d-flex flex-column justify-content-center align-items-center align-self-stretch h-100 w-100"
+                >
+                  <div
+                    id="uploadContent"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center upload-image-container upload-image-container-rows"
+                    >
+                      <img src="/assest/images/upload.png" alt="Upload Icon" />
+                      <p>Upload logo</p>
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-center size-container size-container-rows"
+                    >
+                      <p class="file-size">Maximum file size 2MB</p>
+                      <p class="file-format">Format jpg, png</p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="companyLogo"
+                    onchange="handleFileUpload(this)"
+                  />
+                </label>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="container">
+                <div class="button-container">
+                  <button
+                    type="button"
+                    class="btn btn-custom btn-outline-danger btn-cancel"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-custom btn-outline-primary btn-submit"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar section -->
+        <aside
+          class="col-md-3 col-lg-2 d-flex flex-column align-items-center p-3 sidebar vh-100"
+        >
+          <a href="#" class="d-flex align-items-center no-underline">
+            <img src="/assest/images/icon.png" alt="logo" class="me-2" />
+            <div class="nav-text title">Immivault</div>
+          </a>
+          <nav class="nav custom-nav flex-column w-100">
+            <a href="dashboard.html" class="nav-link d-flex align-items-center">
+              <img
+                src="/assest/images/Dashboard.png"
+                class="nav-img me-2"
+                alt="icon"
+              />
+              <span class="nav-text">Dashboard</span>
+            </a>
+            <a
+              href="company.html"
+              class="nav-link active d-flex align-items-center"
+            >
+              <img
+                src="/assest/images/Company.png"
+                class="nav-img me-2"
+                alt="icon"
+              />
+              <span class="nav-text">Company</span>
+            </a>
+            <a href="user.html" class="nav-link d-flex align-items-center">
+              <img
+                src="/assest/images/Users.png"
+                class="nav-img me-2"
+                alt="icon"
+              />
+              <span class="nav-text">User</span>
+            </a>
+            <a href="history.html" class="nav-link d-flex align-items-center">
+              <img
+                src="/assest/images/Navigation icon.png"
+                class="nav-img me-2"
+                alt="icon"
+              />
+              <span class="nav-text">History</span>
+            </a>
+          </nav>
+          <!-- footer section -->
+          <div class="d-flex align-items-center p-4 mt-auto">
+            <div>
+              <button class="footer-btn btn btn-outline-danger me-4">
+                Logout
+              </button>
+            </div>
+            <div>
+              <button class="btn-icons btn btn-light">
+                <img src="/assest/images/Setting.png" alt="Settings" />
+              </button>
+            </div>
+          </div>
+        </aside>
+        <main class="col-md-9 col-lg-10 p-4">
+          <!-- Header section -->
+          <div class="d-flex justify-content-end align-items-center mb-4">
+            <!-- <div class="input-container d-flex justify-content-center align-items-center p-2 rounded me-4">
+        <input type="text" placeholder="Search" class="input-field w-100 border-0 bg-transparent" />
+        <span class="input-icon d-flex justify-content-center align-items-center p-1">
+          <img src="/assest/images/Search.png" alt="Search" />
+        </span>
+      </div> -->
+
+            <div class="d-flex align-items-center me-4">
+              <div class="breadcrumb-profile me-2">BR</div>
+              <div>
+                <div>Breeza Quix</div>
+                <div class="text-muted">Last update at 18:20 IST</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn-icons btn btn-light me-2">
+                <img src="/assest/images/bell.png" alt="Notifications" />
+              </button>
+              <button class="btn-icons btn btn-light">
+                <img src="/assest/images/profile.png" alt="Profile" />
+              </button>
+            </div>
+          </div>
+          <!-- Content Goes Here -->
+          <div class="component d-flex flex-column p-4">
+            <!-- Breadcrumb section -->
+            <div class="d-flex justify-content-between align-items-center pb-3">
+              <div>
+                <span class="text-custom1">Home /</span>
+                <span class="text-custom2"> Company /</span>
+                <span class="text-custom2"> Cloudrevel</span>
+              </div>
+              <div class="d-flex">
+                <div class="export-dropdown me-4">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected disabled>Export</option>
+                    <option class="text-muted" value="Copy">Copy</option>
+                    <option class="text-muted" value="Csv">Csv</option>
+                    <option class="text-muted" value="Excel">Excel</option>
+                    <option class="text-muted" value="Pdf">Pdf</option>
+                  </select>
+                </div>
+                <button
+                  type="button"
+                  class="btn-add btn btn-outline-primary me-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#filterModal"
+                >
+                  Filter
+                </button>
+                <button
+                  class="btn-add btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Add Employee
+                </button>
+              </div>
+            </div>
+            <!-- Main Container Section -->
+            <div class="d-flex flex-column p-1 table-component-custom">
+              <div
+                class="modal fade"
+                id="filterModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div
+                  class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+                >
+                  <div class="modal-custom-content">
+                    <div class="modal-header ps-4 fw-bold fs-3">Filter</div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="department_id"
+                            id="department_id"
+                            class="form-select select2"
+                          >
+                            <option value="">Select Department</option>
+                            @if(count($departments)) @foreach ($departments as
+                            $department)
+                            <option value="{{$department->id}}">
+                              {{$department->name}}
+                            </option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="indian_medical_report_status"
+                            id="slot_type"
+                            class="form-select select2"
+                          >
+                            <option value="">
+                              Select indian medical report status
+                            </option>
+                            @if(count($indian_medical_report_status)) @foreach
+                            ($indian_medical_report_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="visa_document"
+                            id="visa_document"
+                            class="form-select select2"
+                          >
+                            <option value="">
+                              Select visa document status
+                            </option>
+                            @if(count($visa_documents)) @foreach
+                            ($visa_documents as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="work_permit"
+                            id="work_permit"
+                            class="form-select select2"
+                          >
+                            <option value="">Select work permit status</option>
+                            @if(count($work_permits)) @foreach ($work_permits as
+                            $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="onsite_visa_status"
+                            id="onsite_visa_status"
+                            class="form-select select2"
+                          >
+                            <option value="">Select onsite visa status</option>
+                            @if(count($onsite_visa_status)) @foreach
+                            ($onsite_visa_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="travel_ticket_status"
+                            id="travel_ticket_status"
+                            class="form-select select2"
+                          >
+                            <option value="">
+                              Select travel ticket status
+                            </option>
+                            @if(count($travel_ticket_status)) @foreach
+                            ($travel_ticket_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="medical_report"
+                            id="medical_report"
+                            class="form-select select2"
+                          >
+                            <option value="">
+                              Select medical report status
+                            </option>
+                            @if(count($medical_report)) @foreach
+                            ($medical_report as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="visa_stamp_status"
+                            id="visa_stamp_status"
+                            class="form-select select2"
+                          >
+                            <option value="">Select visa stamp status</option>
+                            @if(count($visa_stamp_status)) @foreach
+                            ($visa_stamp_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="visa_id_status"
+                            id="visa_id_status"
+                            class="form-select select2"
+                          >
+                            <option value="">Select visa id status</option>
+                            @if(count($visa_id_status)) @foreach
+                            ($visa_id_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="insurance_status"
+                            id="insurance_status"
+                            class="form-select select2"
+                          >
+                            <option value="">Select insurance status</option>
+                            @if(count($insurance_status)) @foreach
+                            ($insurance_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="final_closing_status"
+                            id="final_closing_status"
+                            class="form-select select2"
+                          >
+                            <option value="">
+                              Select final closing status
+                            </option>
+                            @if(count($final_closing_status)) @foreach
+                            ($final_closing_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="employee_status"
+                            id="employee_status"
+                            class="form-select select2"
+                          >
+                            <option value="">Select employee status</option>
+                            @if(count($employee_status)) @foreach
+                            ($employee_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <select
+                            name="passport_status"
+                            id="passport_status"
+                            class="form-select select2"
+                          >
+                            <option value="">Select passport status</option>
+                            @if(count($passport_status)) @foreach
+                            ($passport_status as $key=>$value)
+                            <option value="{{$value}}">{{$value}}</option>
+                            @endforeach @endif
+                          </select>
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <div
+                            id="reportrange"
+                            style="
+                              background: #fff;
+                              cursor: pointer;
+                              padding: 5px 10px;
+                              border: 1px solid #ccc;
+                              width: 100%;
+                            "
+                          >
+                            <i class="fa fa-calendar"></i>&nbsp; <span></span>
+                            <i class="fa fa-caret-down"></i>
+                          </div>
+                          <!-- <input type="text" name="date_of_joining" id="start_date" class="form-control datepicker"
+                      placeholder="Indian date of joining" readonly> -->
+                        </div>
+                        <div class="col-md-4 equal-height">
+                          <div
+                            id="reportrange"
+                            style="
+                              background: #fff;
+                              cursor: pointer;
+                              padding: 5px 10px;
+                              border: 1px solid #ccc;
+                              width: 100%;
+                            "
+                          >
+                            <i class="fa fa-calendar"></i>&nbsp; <span></span>
+                            <i class="fa fa-caret-down"></i>
+                          </div>
+                          <!-- <input type="text" name="onsite_joining" id="end_date" class="form-control datepicker"
+                      placeholder="onsite date of joining" readonly> -->
+                        </div>
+
+                        <!-- <div class="col-md-4 equal-height">
+                    <button type="button" class="btn btn-warning" id="reset-filter">Reset</button>
+                  </div> -->
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="footer-btn btn btn-outline-danger me-4">
+                        Reset
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-add btn btn-outline-primary me-4"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <table
+                id="example"
+                class="table table-striped display nowrap table-responsive"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">ACTION</th>
+                    <th scope="col">S.NO</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">MIDDLE NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">DEPARTMENT</th>
+                    <th scope="col">PASSPORT NO</th>
+                    <th scope="col">DATE OF BIRTH</th>
+                    <th scope="col">INDIAN DATE OF JOINING</th>
+                    <th scope="col">INDIAN MEDICAL REPORT</th>
+                    <th scope="col">VISA DOCUMENT</th>
+                    <th scope="col">WORK PERMIT</th>
+                    <th scope="col">ONSITE VISA STATUS</th>
+                    <th scope="col">TRAVEL ONSITE TICKETS STATUS</th>
+                    <th scope="col">ONSITE DATE OF JOINING</th>
+                    <th scope="col">MEDICAL REPORT</th>
+                    <th scope="col">VISA STAMP STATUS</th>
+                    <th scope="col">ONSITE ID STATUS</th>
+                    <th scope="col">MEDICAL INSURANCE</th>
+                    <th scope="col">COMMENTS FROM HR</th>
+                    <th scope="col">FINAL CLOSING STATUS</th>
+                    <th scope="col">EMPLOYEE STATUS</th>
+                    <th scope="col">PASSPORT STATUS</th>
+                    <th scope="col">INDIAN OTHER DOCUMENTS</th>
+                    <th scope="col">INDIAN MEDICAL CERTIFICATE</th>
+                    <th scope="col">PASSPORT UPLOAD</th>
+                    <th scope="col">ONSITE MEDICAL CERTIFICATE</th>
+                    <th scope="col">VISA STAMP DOCUMENT</th>
+                    <th scope="col">ONSITE ID COPY</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="">Edit</a></td>
+                    <td>1</td>
+                    <td>John</td>
+                    <td>Michael</td>
+                    <td>Doe</td>
+                    <td>Engineering</td>
+                    <td>A12345678</td>
+                    <td>1980-01-01</td>
+                    <td>2020-01-01</td>
+                    <td>
+                      <span class="custom-badge rounded-pill badge-green"
+                        >Fit</span
+                      >
+                    </td>
+                    <td>
+                      <span class="custom-badge badge-green rounded-pill"
+                        >Email Sent</span
+                      >
+                    </td>
+                    <td>
+                      <span class="custom-badge badge-green rounded-pill"
+                        >Received</span
+                      >
+                    </td>
+                    <td>
+                      <span class="custom-badge rounded-pill badge-orange"
+                        >Inprocess</span
+                      >
+                    </td>
+                    <td>
+                      <span class="custom-badge badge-green rounded-pill"
+                        >Booked</span
+                      >
+                    </td>
+                    <td>2020-02-01</td>
+                    <td>
+                      <span class="custom-badge badge-green rounded-pill"
+                        >Fit</span
+                      >
+                    </td>
+                    <td>
+                      <span class="custom-badge badge-red rounded-pill"
+                        >Not Received</span
+                      >
+                    </td>
+                    <td>
+                      <span class="custom-badge badge-green rounded-pill"
+                        >ID Received</span
+                      >
+                    </td>
+                    <td>
+                      <!-- wrong -->
+                      <button
+                        type="button"
+                        class="svg-btn"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        data-bs-html="true"
+                        data-bs-title="<div class='tooltip-custom-content'><i class='fa fa-check pe-2' aria-hidden='true'></i>Another point</div><br>
+                                <div class='tooltip-custom-content'><i class='fa fa-times pe-2' aria-hidden='true'></i>Another point</div><br>
+                                <div class='tooltip-custom-content'><i class='fa fa-times pe-2' aria-hidden='true'></i>Another point</div><br>
+                                <div class='tooltip-custom-content'><i class='fa fa-times pe-2' aria-hidden='true'></i>Another point</div><br>
+                                <div class='tooltip-custom-content'><i class='fa fa-times pe-2' aria-hidden='true'></i>Another point</div>"
+                      >
+                        <img src="/assest/images/wrong.png" alt="" />
+                      </button>
+                      <!-- Tick -->
+                      <!-- <button type="button" class="svg-btn">
+                  <img src="/assest/images/Tick.png" alt="" />
+                </button> -->
+                    </td>
+                    <td>All Done</td>
+                    <td>
+                      <span class="custom-badge badge-green rounded-pill"
+                        >Completed</span
+                      >
+                    </td>
+                    <td>Resigned</td>
+                    <td>Migration</td>
+                    <td>
+                      <img src="/assest/images/Document2.png" alt="" />
+                    </td>
+                    <td>
+                      <img src="/assest/images/Document2.png" alt="" />
+                    </td>
+                    <td>
+                      <img src="/assest/images/Document2.png" alt="" />
+                    </td>
+                    <td>
+                      <img src="/assest/images/Document2.png" alt="" />
+                    </td>
+                    <td>
+                      <img src="/assest/images/Document2.png" alt="" />
+                    </td>
+                    <td>
+                      <img src="/assest/images/Document2.png" alt="" />
+                    </td>
+                  </tr>
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $(".select2").select2();
+        $("#example").DataTable({
+          scrollX: true,
+        });
+
+        adjustScrollY();
+      });
+
+      function adjustScrollY() {
+        // Get current window height
+        var screenHeight = window.innerHeight;
+
+        // Determine new height based on window size using percentages
+        var newHeight;
+        if (screenHeight <= 800) {
+          newHeight = "30vh"; // 80% of viewport height
+        } else if (screenHeight > 800 && screenHeight <= 1100) {
+          newHeight = "45vh"; // 70% of viewport height
+        } else {
+          newHeight = "60vh"; // 90% of viewport height
+        }
+
+        // Get elements with the class 'dt-scroll-body'
+        var elements = document.getElementsByClassName("dt-scroll-body");
+
+        // Loop through the elements and update their height
+        for (var i = 0; i < elements.length; i++) {
+          var element = elements[i];
+
+          // Update the height style
+          element.style.height = newHeight;
+        }
+
+        console.log("Updated dt-scroll-body heights to " + newHeight);
+      }
+
+      $(window).on("resize", function () {
+        adjustScrollY();
+      });
+    </script>
+    <script src="/script/addEmployeeFormValidation.js"></script>
+    <script src="/jqscript.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
